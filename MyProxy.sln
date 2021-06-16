@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31220.234
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyProxy", "MyProxy\MyProxy.csproj", "{12DF6894-D2C8-4124-96AF-66CDDE8E0150}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "withTravixCommon", "withTravixCommon", "{E7B14BB9-07E6-4D3A-8A36-D368E4F4FFA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{89867A7D-59C9-4483-9B61-419AD65B5D32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "withTravixCommon.WebService", "withTravixCommon\src\withTravixCommon.WebService\withTravixCommon.WebService.csproj", "{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12DF6894-D2C8-4124-96AF-66CDDE8E0150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12DF6894-D2C8-4124-96AF-66CDDE8E0150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12DF6894-D2C8-4124-96AF-66CDDE8E0150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12DF6894-D2C8-4124-96AF-66CDDE8E0150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF894D34-FC0D-426D-9072-563D66B3702B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{89867A7D-59C9-4483-9B61-419AD65B5D32} = {E7B14BB9-07E6-4D3A-8A36-D368E4F4FFA2}
+		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95} = {89867A7D-59C9-4483-9B61-419AD65B5D32}
+	EndGlobalSection
+EndGlobal

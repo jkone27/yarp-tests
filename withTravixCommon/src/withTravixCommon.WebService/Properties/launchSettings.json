@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "withTravixCommon": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Local"
+      },
+      "applicationUrl": "http://localhost:5000"
+    }
+  }
+}
