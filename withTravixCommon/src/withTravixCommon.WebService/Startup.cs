@@ -23,6 +23,11 @@ namespace withTravixCommon.WebService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var proxyBuilder = services.AddReverseProxy();
+            var proxyConfig = configuration.GetSection("SomeOtherName");
+
+            proxyBuilder.LoadFromConfig(proxyConfig);
+
             services.BootstrapEndpointsWebApplication(
                 webHostEnvironment,
                 configuration,
@@ -34,83 +39,32 @@ namespace withTravixCommon.WebService
                 pipeline => {
                     pipeline.Steps.Remove(pipeline.Steps.Single(it => it.Name == BootstrapStepNames.Diagnostics.ToString()));
 
-                    //pipeline.InsertBefore(BootstrapStepNames.Endpoints, new CorsBootstrapStep());
-
                     // attach yarp proxies
-                    pipeline.InsertAfter(BootstrapStepNames.EndpointsRouting, CreateProxies(configuration));
-                    
+
+                    pipeline.Steps.Single(it => it.Name == BootstrapStepNames.Endpoints.ToString())
+                        .ApplicationBuilderSetup = (app, _) =>
+                    {
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapControllers();
+                            endpoints.MapReverseProxy(proxyPipeline =>
+                                proxyPipeline.Use((context, next) =>
+                                {
+                                    //var logger = context.RequestServices.GetRequiredService<ILogger>();
+                                    //logger.LogDebug(LogEvent.ProxyLog, $"{context.Request.Method} : {context.Request.Path}");
+
+                                    return next();
+                                })
+                            );
+                        });
+                    };
                 });
 
-            //// Add the reverse proxy to capability to the server
-            //var proxyBuilder = services.AddReverseProxy();
-            //// Initialize the reverse proxy from the "ReverseProxy" section of configuration
-            //proxyBuilder.LoadFromConfig(configuration.GetSection("SomeOtherName"));
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            //app.UseRouting();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
-
-            //// Enable endpoint routing, required for the reverse proxy
-            //app.UseRouting();
-            //// Register the reverse proxy routes
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapReverseProxy();
-            //});
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/why", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
-        }
-
-        public static BootstrapStep CreateProxies(IConfiguration configuration)
-        {
-
-            //else
-            return new BootstrapStep("ApisProxies")
-            {
-                ServicesSetup = (services, _) =>
-                {
-                    var proxyBuilder = services.AddReverseProxy();
-                    var proxyConfig = configuration.GetSection("SomeOtherName");
-
-                    proxyBuilder.LoadFromConfig(proxyConfig);
-
-                },
-                ApplicationBuilderSetup = (app, _) =>
-                {
-                    // Enable endpoint routing, required for the reverse proxy
-                    //app.UseRouting();
-
-                    // Register the reverse proxy routes
-                    app.UseEndpoints(endpoints =>
-                    {
-                        endpoints.MapReverseProxy(proxyPipeline =>
-                            proxyPipeline.Use((context, next) =>
-                            {
-                                //var logger = context.RequestServices.GetRequiredService<ILogger>();
-                                //logger.LogDebug(LogEvent.ProxyLog, $"{context.Request.Method} : {context.Request.Path}");
-
-                                return next();
-                            })
-                        );
-                    });
-                }
-            };
-
+            
         }
     }
 }

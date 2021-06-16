@@ -27,6 +27,8 @@ namespace MyProxy
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRouting();
+
             // Add the reverse proxy to capability to the server
             var proxyBuilder = services.AddReverseProxy();
             // Initialize the reverse proxy from the "ReverseProxy" section of configuration
@@ -45,22 +47,13 @@ namespace MyProxy
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapReverseProxy();
                 endpoints.MapGet("/", async context =>
                 {
+
                     await context.Response.WriteAsync("Hello World!");
                 });
-            });
 
-            // Enable endpoint routing, required for the reverse proxy
-            app.UseRouting();
-            // Register the reverse proxy routes
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapReverseProxy();
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
                 endpoints.MapGet("/why", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
