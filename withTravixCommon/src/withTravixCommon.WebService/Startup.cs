@@ -50,8 +50,8 @@ namespace withTravixCommon.WebService
                             endpoints.MapReverseProxy(proxyPipeline =>
                                 proxyPipeline.Use((context, next) =>
                                 {
-                                    //var logger = context.RequestServices.GetRequiredService<ILogger>();
-                                    //logger.LogDebug(LogEvent.ProxyLog, $"{context.Request.Method} : {context.Request.Path}");
+                                    var logger = context.RequestServices.GetRequiredService<ILogger>();
+                                    logger.LogDebug(LogEvent.ProxyLog, $"{context.Request.Method} : {context.Request.Path}");
 
                                     return next();
                                 })

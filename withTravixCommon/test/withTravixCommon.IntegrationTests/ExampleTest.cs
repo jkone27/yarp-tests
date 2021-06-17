@@ -1,31 +1,41 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using withTravixCommon.WebService;
+﻿using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace withTravixCommon.IntegrationTests
 {
-    public class ExampleTest
-    {
-        private readonly TestServer server;
 
-        public ExampleTest()
+    public class ExampleTest : IClassFixture<TestAppFactory>
+    {
+        private readonly TestAppFactory testAppFactory;
+
+        public ExampleTest(TestAppFactory testAppFactory)
         {
-            server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+            this.testAppFactory = testAppFactory;
         }
 
         [Fact]
-        public async Task ExampleGet_Called_HelloReturned()
+        public async Task Proxy_Configured_Ok()
         {
-            using (var client = server.CreateClient())
-            {
-                var response = await client.GetAsync("/example");
+            TestProxyHandler.RequestPredicate = r => r.RequestUri.ToString() == "https://127.0.0.1/hello/test-proxy";
 
-                var content = await response.Content.ReadAsStringAsync();
+            var client = testAppFactory.CreateClient();
 
-                Assert.Equal("Hello!", content);
-            }
+            var response = await client.GetAsync("/test-proxy");
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task Proxy_NonConfiguredRoute_Fails()
+        {
+            TestProxyHandler.RequestPredicate = r => r.RequestUri.ToString() == "https://127.0.0.1/not-configured/test-proxy";
+
+            var client = testAppFactory.CreateClient();
+
+            var response = await client.GetAsync("/not-configured");
+
+            Assert.ThrowsAny<Exception>(() => response.EnsureSuccessStatusCode());
         }
     }
 }

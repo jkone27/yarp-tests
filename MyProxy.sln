@@ -9,7 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "withTravixCommon", "withTra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{89867A7D-59C9-4483-9B61-419AD65B5D32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "withTravixCommon.WebService", "withTravixCommon\src\withTravixCommon.WebService\withTravixCommon.WebService.csproj", "{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "withTravixCommon.WebService", "withTravixCommon\src\withTravixCommon.WebService\withTravixCommon.WebService.csproj", "{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FC88F071-C3EF-4B7B-946F-EF1683524816}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "withTravixCommon.IntegrationTests", "withTravixCommon\test\withTravixCommon.IntegrationTests\withTravixCommon.IntegrationTests.csproj", "{82E9F32A-0118-40C2-8C41-160BAF0C026F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,15 +29,21 @@ Global
 		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82E9F32A-0118-40C2-8C41-160BAF0C026F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E9F32A-0118-40C2-8C41-160BAF0C026F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E9F32A-0118-40C2-8C41-160BAF0C026F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E9F32A-0118-40C2-8C41-160BAF0C026F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BF894D34-FC0D-426D-9072-563D66B3702B}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{89867A7D-59C9-4483-9B61-419AD65B5D32} = {E7B14BB9-07E6-4D3A-8A36-D368E4F4FFA2}
 		{4D073C13-FD62-4A17-9AFD-B3A0B1581A95} = {89867A7D-59C9-4483-9B61-419AD65B5D32}
+		{FC88F071-C3EF-4B7B-946F-EF1683524816} = {E7B14BB9-07E6-4D3A-8A36-D368E4F4FFA2}
+		{82E9F32A-0118-40C2-8C41-160BAF0C026F} = {FC88F071-C3EF-4B7B-946F-EF1683524816}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF894D34-FC0D-426D-9072-563D66B3702B}
 	EndGlobalSection
 EndGlobal

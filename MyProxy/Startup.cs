@@ -48,16 +48,6 @@ namespace MyProxy
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapReverseProxy();
-                endpoints.MapGet("/", async context =>
-                {
-
-                    await context.Response.WriteAsync("Hello World!");
-                });
-
-                endpoints.MapGet("/why", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
             });
         }
     }
